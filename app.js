@@ -83,10 +83,10 @@ function compare(remainder, noteAmt, index){
         remainder = remainder - notes*noteAmt;
         noOfNotes[index].innerText = `${notes}`;
     }
-    return remainder
+    return remainder;
 }
 
-//if check button clicked without refreshing the page, clear the no of notes values on the screen
+//if submit button clicked without refreshing the page, clear the no of notes values on the screen
 function clearNoOfNotes(){
     for(let notes of noOfNotes){
         notes.innerText = "";
