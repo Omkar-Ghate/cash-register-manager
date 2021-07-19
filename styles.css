@@ -92,17 +92,17 @@ th{
     color: white;
 }
 
-#btn{
+#nextBtn, #submitBtn{
     border: solid 2px white;
     border-radius: 4px;
-    margin: 2px 0;
+    margin: 0.5rem;
     padding: 0.5em 1em;
     color: var(--btn-text-color);
     background-color: transparent;
     transition: 0.3s;
 }
 
-#btn:hover{
+#nextBtn:hover, #submitBtn:hover{
     color: var(--text-color);
     border-color: transparent;
     background-color: #2a9d8f;
