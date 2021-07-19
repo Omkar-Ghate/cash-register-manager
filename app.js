@@ -1,87 +1,104 @@
-var btnref = document.querySelector("#btn");
+// Input
+const billAmt = document.querySelector("#billAmt");
+const cashGiven = document.querySelector("#cashGiven");
 
-var outputref = document.querySelector("#output");
+const errorDiv = document.querySelector(".errorMsg");
+const change = document.querySelector("#change");
+const cashGivenDiv = document.querySelector(".cashGivenInput");
+const changeReturnDiv = document.querySelector(".changeReturn");
 
-btnref.addEventListener("click", clickHandler);
+// Output
+const output= document.querySelector("#output");
 
-function clickHandler() {
+// Buttons
+const nextBtn = document.querySelector("#nextBtn");
+const submitBtn = document.querySelector("#submitBtn");
 
-    var outputDiv = document.getElementById("output1"); //get reference of output div by id
-    outputDiv.innerHTML = ""; // (without user refreshing the screen, instead of updating, another table is appended. This fixes that issue.)
-    outputref.innerHTML="";
+// Notes
+const noOfNotes= document.querySelectorAll(".noOfNotes");
 
-    var billAmt = document.getElementById('bill').value;    
-    var cashAmt = document.getElementById('cash').value;
-
-    if (Number(cashAmt) < Number(billAmt)) {
-        alert("Please enter Cash Amount greater than or equal to Bill Amount.");
-    } 
-    else 
-    {
-        console.log("bill: " + billAmt + " cash: " + cashAmt);
-        var returnAmt = Number(cashAmt) - Number(billAmt);
-        console.log("return amt: " + returnAmt);
-
-        var count_of_1 = 0; //7 denominations of the currency.
-        var count_of_5 = 0;
-        var count_of_10 = 0;
-        var count_of_20 = 0;
-        var count_of_100 = 0;
-        var count_of_500 = 0;
-        var count_of_2000 = 0;
-
-        var amt_for_return = returnAmt;
-        switch (amt_for_return > 0) {
-
-            case amt_for_return > 2000:
-                count_of_2000 = Math.floor(amt_for_return / 2000);
-                amt_for_return = Math.floor(amt_for_return % 2000);
-                console.log("no of 2000 notes: " + count_of_2000 + " amt_for_return= " + amt_for_return);
-
-            case amt_for_return > 500:
-                count_of_500 = Math.floor(amt_for_return / 500);
-                amt_for_return = Math.floor(amt_for_return % 500);
-                console.log("no of 500 notes: " + count_of_500 + " amt_for_return= " + amt_for_return);
-
-            case amt_for_return > 100:
-                count_of_100 = Math.floor(amt_for_return / 100);
-                amt_for_return = Math.floor(amt_for_return % 100);
-                console.log("no of 100 notes: " + count_of_100 + " amt_for_return= " + amt_for_return);
-
-            case amt_for_return > 20:
-                count_of_20 = Math.floor(amt_for_return / 20);
-                amt_for_return = Math.floor(amt_for_return % 20);
-                console.log("no of 20 notes: " + count_of_20 + " amt_for_return= " + amt_for_return);
-
-            case amt_for_return > 10:
-                count_of_10 = Math.floor(amt_for_return / 10);
-                amt_for_return = Math.floor(amt_for_return % 10);
-                console.log("no of 10 notes: " + count_of_10 + " amt_for_return= " + amt_for_return);
-
-            case amt_for_return > 5:
-                count_of_5 = Math.floor(amt_for_return / 5);
-                amt_for_return = Math.floor(amt_for_return % 5);
-                console.log("no of 5 notes: " + count_of_5 + " amt_for_return= " + amt_for_return);
-
-            case amt_for_return >= 1:
-                count_of_1 = Math.floor(amt_for_return / 1);
-                amt_for_return = Math.floor(amt_for_return % 1);
-                console.log("no of 1 notes: " + count_of_1 + " amt_for_return= " + amt_for_return);
-                break;
-        }
-
-        var denom_dict = {
-            "1": count_of_1,
-            "5": count_of_5,
-            "10": count_of_10,
-            "20": count_of_20,
-            "100": count_of_100,
-            "500": count_of_500,
-            "2000": count_of_2000
-        };
-
-        outputref.innerText = "Return Amount: " + returnAmt;
+const arrayNoteAmt = [2000, 500, 100, 20, 10, 5, 1];
 
 
+//if bill amt filled, display cash given input field
+nextBtn.addEventListener('click', ()=>{
+    hideError();
+    if(Number(billAmt.value)>0){
+        nextBtn.style.display = "none";
+        cashGivenDiv.style.display = "block";
     }
+    else{
+        showError("Enter valid bill amount");
+    }
+} );
+
+
+//check btn clicked handler
+submitBtn.addEventListener('click', ()=>{
+    clearNoOfNotes();
+    hideError();
+    //error handling
+    let billAmtValue= Number(billAmt.value);
+    let cashGivenValue= Number(cashGiven.value);
+
+    if(billAmtValue>0 && cashGivenValue>0){
+
+        if(!Number.isInteger(cashGivenValue)){
+            showError("Enter valid amount in cash given field");
+            return;
+        }
+        if(billAmtValue > cashGivenValue){
+            showError("Cash is less than bill, please enter right amount");
+            return;
+        }
+        //if input is valid, calculate no. of notes
+        calculateNotes(billAmtValue, cashGivenValue);
+    } else{
+        showError("Enter valid bill amount and cash given to continue");
+        }
+});
+
+//Calculating no. of notes
+function calculateNotes(bill, cash){
+    let returnAmt = cash-bill;
+    
+    if(returnAmt<1){
+        showError("No amount should be returned");
+        return;
+    }
+    //Showing the amount to be returned
+    changeReturnDiv.style.display = "block";
+    change.innerHTML = returnAmt;
+
+    for(let i=0; i<arrayNoteAmt.length; i++){
+        returnAmt= compare(returnAmt, arrayNoteAmt[i], i);
+    } 
+}
+
+//compare with currency and post the no. of notes on screen
+function compare(remainder, noteAmt, index){
+
+    if(remainder >= noteAmt){
+        let notes = Math.floor(remainder/noteAmt);
+        remainder = remainder - notes*noteAmt;
+        noOfNotes[index].innerText = `${notes}`;
+    }
+    return remainder
+}
+
+//if check button clicked without refreshing the page, clear the no of notes values on the screen
+function clearNoOfNotes(){
+    for(let notes of noOfNotes){
+        notes.innerText = "";
+    }
+}
+
+function showError(text){
+    errorDiv.style.display = "block";
+    errorDiv.innerText= text;
+    changeReturnDiv.style.display = "none";
+}
+
+function hideError(){
+    errorDiv.style.display = "none";
 }
