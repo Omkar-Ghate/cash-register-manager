@@ -1,0 +1,84 @@
+*{
+    box-sizing: border-box;
+}
+:root {
+    --primary-color: #F4F2EB;
+    --secondary-color: #264653;
+    --heading-color: #e9c46a;
+    --text-color:#f4a261 ;
+    --table-color: #40758a;;
+  
+    --btn-background-color:#2a9d8f;
+    --btn-text-color:whitesmoke;
+
+}
+
+body {
+    text-align: center;
+    display:flex;
+    background-color: var(--primary-color);
+    padding:1%;
+    color:var(--text-color);
+}
+/* Outer Main Container */
+.main-container{
+    padding: 5% 5% 5% 5%;
+    background-color: var(--secondary-color);
+    align-items: center;
+    letter-spacing: 1px;
+    margin:auto;
+    border-radius: 4px;
+}
+
+
+input{
+    width: 100%;
+    height: 2.5rem;
+    padding: 0px 1rem;
+}
+
+/* Table */
+#output1{
+    width: 80%;
+    height: 10rem;
+    margin: auto;
+}
+
+table{
+    table-layout:auto;
+    border-spacing: 0.5rem;
+    border-color: var(--btn-background-color);
+    background-color:var(--btn);
+    text-align: center;
+}
+
+th{
+    padding: 0.2rem;
+    font-size: 1rem;
+}
+
+.thead{
+    background-color: var(--btn-background-color);
+    color: white;
+}
+
+#btn{
+    border: solid 2px white;
+    border-radius: 4px;
+    margin: 2px 0;
+    padding: 0.5em 1em;
+    color: var(--btn-text-color);
+    background-color: transparent;
+    transition: 0.3s;
+}
+
+#btn:hover{
+    color: var(--text-color);
+    border-color: transparent;
+    background-color: #2a9d8f;
+    transform: scale(1.2);
+}
+
+#cash,#cashlabel{
+   visibility: hidden;
+}
