@@ -82,10 +82,11 @@ table{
 }
 
 th{
-    padding: 0.7rem 2rem;
+    padding: 0.7rem 0.7rem;
     font-size: 1.2rem;
     background-color: var(--btn-background-color);
     color: white;
+    width: fit-content;
 }
 
 .thead th{
