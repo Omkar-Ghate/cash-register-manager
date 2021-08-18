@@ -117,11 +117,20 @@ th{
     transform: scale(1.2);
 }
 /* Footer Section */
-
+footer {
+    padding: 0 0 1rem;
+    background-color: whitesmoke;
+    color: var(--background-color);
+    padding: 1rem;
+    border: 1px transparent;
+    border-radius: 0.5rem;
+    margin: 2rem;
+  }
 .creator {
     text-align: center;
     margin: 0.4rem;
     color: var(--secondary-color);
+    font-size: 1.2rem;
   }
   .creator strong {
     color: hotpink;
@@ -143,15 +152,6 @@ th{
     margin: 0rem 0.3rem;
   }
   
-  footer {
-    padding: 0 0 1rem;
-    background-color: whitesmoke;
-    color: var(--background-color);
-    padding: 1rem;
-    border: 1px transparent;
-    border-radius: 0.5rem;
-    margin: 2rem;
-  }
   
   footer ul {
     list-style: none;
