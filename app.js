@@ -75,22 +75,6 @@ const calculateNotes = (bill, cash) => {
     } 
 }
 
-// function calculateNotes(bill, cash){
-//     let returnAmt = cash-bill;
-    
-//     if(returnAmt<1){
-//         showError("No amount should be returned");
-//         return;
-//     }
-//     //Showing the amount to be returned
-//     changeReturnDiv.style.display = "block";
-//     change.innerHTML = returnAmt;
-
-//     for(let i=0; i<arrayNoteAmt.length; i++){
-//         returnAmt= compare(returnAmt, arrayNoteAmt[i], i);
-//     } 
-// }
-
 // compare with currency and post the no. of notes on screen
 const compare = (remainder, noteAmt, index) => {
     if(remainder >= noteAmt){
@@ -101,17 +85,6 @@ const compare = (remainder, noteAmt, index) => {
     return remainder;
 }
 
-// function compare(remainder, noteAmt, index){
-
-//     if(remainder >= noteAmt){
-//         let notes = Math.floor(remainder/noteAmt);
-//         remainder = remainder - notes*noteAmt;
-//         noOfNotes[index].innerText = `${notes}`;
-//     }
-//     return remainder;
-// }
-
-
 // if submit button clicked without refreshing the page, clear the no of notes values on the screen
 const clearNoOfNotes = () => {
     for(let notes of noOfNotes){
@@ -119,26 +92,10 @@ const clearNoOfNotes = () => {
     }
 }
 
-// function clearNoOfNotes(){
-//     for(let notes of noOfNotes){
-//         notes.innerText = "";
-//     }
-// }
-
 const showError = text => {
     errorDiv.style.display = "block";
     errorDiv.innerText= text;
     changeReturnDiv.style.display = "none";
 }
 
-// function showError(text){
-//     errorDiv.style.display = "block";
-//     errorDiv.innerText= text;
-//     changeReturnDiv.style.display = "none";
-// }
-
 const hideError = () => errorDiv.style.display = "none";
-
-// function hideError(){
-//     errorDiv.style.display = "none";
-// }
