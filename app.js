@@ -20,7 +20,7 @@ const noOfNotes= document.querySelectorAll(".noOfNotes");
 const arrayNoteAmt = [2000, 500, 100, 20, 10, 5, 1];
 
 
-//if bill amt filled, display cash given input field
+// if bill amt filled, display cash given input field
 nextBtn.addEventListener('click', ()=>{
     hideError();
     if(Number(billAmt.value)>0){
@@ -33,13 +33,13 @@ nextBtn.addEventListener('click', ()=>{
 } );
 
 
-//check btn clicked handler
+// check btn clicked handler
 submitBtn.addEventListener('click', ()=>{
     clearNoOfNotes();
     hideError();
     //error handling
-    let billAmtValue= Number(billAmt.value);
-    let cashGivenValue= Number(cashGiven.value);
+    let billAmtValue = Number(billAmt.value);
+    let cashGivenValue = Number(cashGiven.value);
 
     if(billAmtValue>0 && cashGivenValue>0){
 
@@ -58,8 +58,8 @@ submitBtn.addEventListener('click', ()=>{
         }
 });
 
-//Calculating no. of notes
-function calculateNotes(bill, cash){
+// Calculating no. of notes
+const calculateNotes = (bill, cash) => {
     let returnAmt = cash-bill;
     
     if(returnAmt<1){
@@ -75,9 +75,24 @@ function calculateNotes(bill, cash){
     } 
 }
 
-//compare with currency and post the no. of notes on screen
-function compare(remainder, noteAmt, index){
+// function calculateNotes(bill, cash){
+//     let returnAmt = cash-bill;
+    
+//     if(returnAmt<1){
+//         showError("No amount should be returned");
+//         return;
+//     }
+//     //Showing the amount to be returned
+//     changeReturnDiv.style.display = "block";
+//     change.innerHTML = returnAmt;
 
+//     for(let i=0; i<arrayNoteAmt.length; i++){
+//         returnAmt= compare(returnAmt, arrayNoteAmt[i], i);
+//     } 
+// }
+
+// compare with currency and post the no. of notes on screen
+const compare = (remainder, noteAmt, index) => {
     if(remainder >= noteAmt){
         let notes = Math.floor(remainder/noteAmt);
         remainder = remainder - notes*noteAmt;
@@ -86,19 +101,44 @@ function compare(remainder, noteAmt, index){
     return remainder;
 }
 
-//if submit button clicked without refreshing the page, clear the no of notes values on the screen
-function clearNoOfNotes(){
+// function compare(remainder, noteAmt, index){
+
+//     if(remainder >= noteAmt){
+//         let notes = Math.floor(remainder/noteAmt);
+//         remainder = remainder - notes*noteAmt;
+//         noOfNotes[index].innerText = `${notes}`;
+//     }
+//     return remainder;
+// }
+
+
+// if submit button clicked without refreshing the page, clear the no of notes values on the screen
+const clearNoOfNotes = () => {
     for(let notes of noOfNotes){
         notes.innerText = "";
     }
 }
 
-function showError(text){
+// function clearNoOfNotes(){
+//     for(let notes of noOfNotes){
+//         notes.innerText = "";
+//     }
+// }
+
+const showError = text => {
     errorDiv.style.display = "block";
     errorDiv.innerText= text;
     changeReturnDiv.style.display = "none";
 }
 
-function hideError(){
-    errorDiv.style.display = "none";
-}
+// function showError(text){
+//     errorDiv.style.display = "block";
+//     errorDiv.innerText= text;
+//     changeReturnDiv.style.display = "none";
+// }
+
+const hideError = () => errorDiv.style.display = "none";
+
+// function hideError(){
+//     errorDiv.style.display = "none";
+// }
